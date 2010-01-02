@@ -1,0 +1,5 @@
+(pyimport "UserList")
+
+(= l (UserList.UserList))
+((. l append) 3)
+(print l "\n")

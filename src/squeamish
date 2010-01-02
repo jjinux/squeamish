@@ -1,0 +1,10 @@
+#!/usr/bin/python
+
+"""This is the main executable for Squeamish."""
+
+# Edit the path below if you need to port Squeamish.
+import sys
+sys.path.append("/Users/jj/programming/python/squeamish")
+
+from Shell import Shell
+Shell().mainLoop()

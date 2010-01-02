@@ -1,0 +1,9 @@
+(def print_times(s times)
+  # Print [s] [times] times.
+  (if times (
+    (print s)
+    (print_times s (- times 1))
+  ))
+)
+
+(print_times "x" 3)

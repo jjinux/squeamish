@@ -1,0 +1,30 @@
+# This is a simple time server.
+# 
+# This program accepts no arguments.  When started, it launches a time server
+# on port 4444.  This program is IPv6 compatible when used with Java 1.4 or
+# higher.
+# 
+# Author: Shannon -jj Behrens
+# Date: Sat Apr 12 23:40:04 PDT 2003
+
+(pyimport "java")
+(pyimport "time")
+
+(= SERVER_PORT 4444)
+
+(def main_loop(serverSocket)
+  # Accept a connection, handle it, and recurse.
+  (= clientSocket ((. serverSocket accept)))
+  (= outputStream ((. clientSocket getOutputStream)))
+  (= out (java.io.PrintWriter outputStream 1))
+  (= timetime (time.time))
+  (= ctime (time.ctime timetime))
+  ((. out println) ctime)
+  ((. out close))
+  ((. clientSocket close))
+  (main_loop serverSocket)
+)
+
+(= serverSocket (java.net.ServerSocket SERVER_PORT))
+(main_loop serverSocket)
+((. serverSocket close))

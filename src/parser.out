@@ -1,0 +1,187 @@
+
+
+Unused terminals:
+
+
+Grammar
+
+Rule 1     list -> LPAREN nodes RPAREN
+Rule 2     nodes -> node nodes
+Rule 3     nodes -> empty
+Rule 4     empty -> <empty>
+Rule 5     node -> INT
+Rule 6     node -> FLOAT
+Rule 7     node -> STRING
+Rule 8     node -> SYMBOL
+Rule 9     node -> list
+
+Terminals, with rules where they appear
+
+RPAREN               : 1
+STRING               : 7
+LPAREN               : 1
+error                : 
+INT                  : 5
+SYMBOL               : 8
+FLOAT                : 6
+
+Nonterminals, with rules where they appear
+
+node                 : 2
+nodes                : 1 2
+list                 : 9 0
+empty                : 3
+
+
+Parsing method: SLR
+
+
+state 0
+
+    S' -> . list
+    list -> . LPAREN nodes RPAREN
+
+    LPAREN          shift and go to state 2
+
+
+state 1
+
+    S' -> list .
+
+
+
+state 2
+
+    list -> LPAREN . nodes RPAREN
+    nodes -> . node nodes
+    nodes -> . empty
+    node -> . INT
+    node -> . FLOAT
+    node -> . STRING
+    node -> . SYMBOL
+    node -> . list
+    empty -> .
+    list -> . LPAREN nodes RPAREN
+
+    INT             shift and go to state 5
+    FLOAT           shift and go to state 7
+    STRING          shift and go to state 4
+    SYMBOL          shift and go to state 9
+    RPAREN          reduce using rule 4
+    LPAREN          shift and go to state 2
+
+
+state 3
+
+    nodes -> node . nodes
+    nodes -> . node nodes
+    nodes -> . empty
+    node -> . INT
+    node -> . FLOAT
+    node -> . STRING
+    node -> . SYMBOL
+    node -> . list
+    empty -> .
+    list -> . LPAREN nodes RPAREN
+
+    INT             shift and go to state 5
+    FLOAT           shift and go to state 7
+    STRING          shift and go to state 4
+    SYMBOL          shift and go to state 9
+    RPAREN          reduce using rule 4
+    LPAREN          shift and go to state 2
+
+
+state 4
+
+    node -> STRING .
+
+    INT             reduce using rule 7
+    FLOAT           reduce using rule 7
+    STRING          reduce using rule 7
+    SYMBOL          reduce using rule 7
+    LPAREN          reduce using rule 7
+    RPAREN          reduce using rule 7
+
+
+state 5
+
+    node -> INT .
+
+    INT             reduce using rule 5
+    FLOAT           reduce using rule 5
+    STRING          reduce using rule 5
+    SYMBOL          reduce using rule 5
+    LPAREN          reduce using rule 5
+    RPAREN          reduce using rule 5
+
+
+state 6
+
+    list -> LPAREN nodes . RPAREN
+
+    RPAREN          shift and go to state 12
+
+
+state 7
+
+    node -> FLOAT .
+
+    INT             reduce using rule 6
+    FLOAT           reduce using rule 6
+    STRING          reduce using rule 6
+    SYMBOL          reduce using rule 6
+    LPAREN          reduce using rule 6
+    RPAREN          reduce using rule 6
+
+
+state 8
+
+    node -> list .
+
+    INT             reduce using rule 9
+    FLOAT           reduce using rule 9
+    STRING          reduce using rule 9
+    SYMBOL          reduce using rule 9
+    LPAREN          reduce using rule 9
+    RPAREN          reduce using rule 9
+
+
+state 9
+
+    node -> SYMBOL .
+
+    INT             reduce using rule 8
+    FLOAT           reduce using rule 8
+    STRING          reduce using rule 8
+    SYMBOL          reduce using rule 8
+    LPAREN          reduce using rule 8
+    RPAREN          reduce using rule 8
+
+
+state 10
+
+    nodes -> empty .
+
+    RPAREN          reduce using rule 3
+
+
+state 11
+
+    nodes -> node nodes .
+
+    RPAREN          reduce using rule 2
+
+
+state 12
+
+    list -> LPAREN nodes RPAREN .
+
+    $               reduce using rule 1
+    INT             reduce using rule 1
+    FLOAT           reduce using rule 1
+    STRING          reduce using rule 1
+    SYMBOL          reduce using rule 1
+    LPAREN          reduce using rule 1
+    RPAREN          reduce using rule 1
+

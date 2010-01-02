@@ -1,0 +1,31 @@
+
+                                   SQUEAMISH
+                                   =========
+
+This is a simple Lisp dialect written in Python.  It's main features are:
+
+    o lazy evaluation
+    o dynamic function scoping
+    o first class functions
+    o Python-like functionality
+    o the ability to call Python functions and methods natively
+
+It's goal is to be a simple "practice" language.  It is potentially even useful
+thanks to interoperability with Python and Jython.  The PLY (Python Lex-Yacc)
+module will be used for lexing and parsing.
+
+See the Dr. Dobb's article I wrote about Squeamish:
+http://www.ddj.com/web-development/184405580
+
+The demo program "time_server" is a sockets based time server that will work
+with IPv6 (given the correct Java SDK for Jython).  To run the demo
+application, run:
+
+    cd src
+    make test                     		# Prep Python Lex-Yacc.
+    jython squeamish ../demo/time_server.sqm &  # Start the server.
+    telnet localhost 4444                       # Try connecting.
+    kill %1					# Stop the server.
+
+Author: Shannon -jj Behrens
+Date: Sat Feb 22 00:25:28 PST 2003
